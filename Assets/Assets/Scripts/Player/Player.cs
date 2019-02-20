@@ -10,7 +10,7 @@ public class Player : MonoBehaviour {
     public float velocidade;
     Animator animator;
 	public Image[] hearts;
-	public int maxHelth;
+	public int maxHealth;
 	public Text Tmover_y;
 	public Text Tmover_x;
 	int currentHealth;
@@ -19,7 +19,7 @@ public class Player : MonoBehaviour {
     // Use this for initialization
     void Start () {
         animator = GetComponent<Animator>();
-		currentHealth = maxHelth;
+		currentHealth = maxHealth;
 		getHealth();
     }
 	
@@ -49,7 +49,6 @@ public class Player : MonoBehaviour {
 
         if (Application.platform == RuntimePlatform.Android)
         {
-            
             Debug.Log(Application.platform);
             mover_x = CrossPlatformInputManager.GetAxisRaw("Horizontal") * velocidade * Time.deltaTime;
             mover_y = CrossPlatformInputManager.GetAxisRaw("Vertical") * velocidade * Time.deltaTime;
