@@ -7,24 +7,46 @@ using UnityEngine.UI;
 public class Player : MonoBehaviour {
 
 
-    public float velocidade ;
+    public float velocidade;
     Animator animator;
+	public Image[] hearts;
+	public int maxHelth;
 	public Text Tmover_y;
 	public Text Tmover_x;
+	int currentHealth;
+
+
     // Use this for initialization
     void Start () {
         animator = GetComponent<Animator>();
+		currentHealth = maxHelth;
+		getHealth();
     }
 	
 	// Update is called once per frame
 	void Update () {
-        Movement();
+        Movement(); 	
+		getHealth(); 
+	}
+
+	void getHealth(){
+		
+		for (int i = 0; i <= hearts.Length - 1 ; i++) {
+			
+			hearts[i].gameObject.SetActive (false);
+		}
+
+		for (int i = 0; i <= currentHealth - 1 ; i++) {
+			
+			hearts[i].gameObject.SetActive (true);
+		}
 	}
 
     void Movement()
     {
         float mover_x;
         float mover_y;
+
         if (Application.platform == RuntimePlatform.Android)
         {
             
@@ -36,8 +58,6 @@ public class Player : MonoBehaviour {
         {
             mover_x = Input.GetAxisRaw("Horizontal") * velocidade * Time.deltaTime;
             mover_y = Input.GetAxisRaw("Vertical") * velocidade * Time.deltaTime;
-			//Debug.Log(mover_x);
-			//Debug.Log(mover_y);
         };
 
 		 animator.SetFloat ("diry", 0f);
@@ -53,6 +73,7 @@ public class Player : MonoBehaviour {
 		{
 			Debug.Log("Moving Down");
 			animator.SetFloat ("diry", mover_y);
+
 		}
 
 		if (mover_x > 0.007f)
@@ -70,24 +91,8 @@ public class Player : MonoBehaviour {
         transform.Translate(mover_x, 0.0f, 0.0f);
         transform.Translate(0.0f, mover_y, 0.0f);
 
-
 		Tmover_y.text = " move y: "+ mover_y.ToString();
 		Tmover_x.text = " move x: "+mover_x.ToString();
 	
-
-		//animator.SetFloat ("diry", mover_y);
-		//animator.SetFloat ("dirx", mover_x);
-
-        // animator.SetFloat("walk_top", Mathf.Abs(Input.GetAxisRaw("Vertical")));
-
-//        if (mover_x > 0.0f) 
-//
-//        {
-//            animator.SetInteger("dirx",2);
-//        }
-//        else if (mover_x < 0.0f)
-//        {
-//			animator.SetInteger("dirx",-2);
-//        }
     }
 }
