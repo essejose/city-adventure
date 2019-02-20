@@ -13,7 +13,12 @@ public class Player : MonoBehaviour {
 	public int maxHealth;
 	public Text Tmover_y;
 	public Text Tmover_x;
+	public int weaponThrust;
 	int currentHealth;
+	float mover_x;
+	float mover_y;
+	string lastPosition = "Down";
+	public GameObject weapon;
 
 
     // Use this for initialization
@@ -27,6 +32,7 @@ public class Player : MonoBehaviour {
 	void Update () {
         Movement(); 	
 		getHealth(); 
+
 	}
 
 	void getHealth(){
@@ -42,10 +48,44 @@ public class Player : MonoBehaviour {
 		}
 	}
 
+	public void Attack(){
+
+		 
+		GameObject newWeapon = Instantiate (weapon, transform.position, weapon.transform.rotation);
+
+	
+		if (lastPosition == "Up")
+		{
+			newWeapon.transform.Rotate (0, 0, 0);
+			newWeapon.GetComponent<Rigidbody2D>().AddForce(Vector2.up * weaponThrust);
+		}
+
+		else 	if (lastPosition == "Down")
+		{
+			 
+			newWeapon.transform.Rotate (0, 0, 180);
+			newWeapon.GetComponent<Rigidbody2D>().AddForce(Vector2.down * weaponThrust);
+		}
+
+		if (lastPosition == "Right")
+		{
+			newWeapon.transform.Rotate (0, 0, -90);
+			newWeapon.GetComponent<Rigidbody2D>().AddForce(Vector2.right * weaponThrust);
+		}
+
+		if (lastPosition == "Left")
+		{
+			newWeapon.transform.Rotate (0, 0, 90);
+			newWeapon.GetComponent<Rigidbody2D>().AddForce(Vector2.left * weaponThrust);
+		}
+
+
+
+	}
+
     void Movement()
     {
-        float mover_x;
-        float mover_y;
+       
 
         if (Application.platform == RuntimePlatform.Android)
         {
@@ -65,26 +105,34 @@ public class Player : MonoBehaviour {
 		if (mover_y > 0.007f)
 		{
 			Debug.Log("Moving Up");
+			lastPosition = "Up";
 			animator.SetFloat ("diry",mover_y);
+
 		}
 
 		else if (mover_y < -0.007f)
 		{
 			Debug.Log("Moving Down");
+			lastPosition = "Down";
 			animator.SetFloat ("diry", mover_y);
+
 
 		}
 
 		if (mover_x > 0.007f)
 		{
 			Debug.Log("Moving Right");
+			lastPosition = "Right";
 			animator.SetFloat ("dirx", mover_x);
+	
 		}
 
 		else if (mover_x < -0.007f)
 		{
 			Debug.Log("Moving left");
+			lastPosition = "Left";
 			animator.SetFloat ("dirx", mover_x);
+
 		}
      
         transform.Translate(mover_x, 0.0f, 0.0f);
