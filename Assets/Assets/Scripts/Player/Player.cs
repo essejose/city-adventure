@@ -13,7 +13,7 @@ public class Player : MonoBehaviour {
 	public int maxHealth;
 	public Text Tmover_y;
 	public Text Tmover_x;
-	public int weaponThrust;
+	public int weaponThrust; 
 	int currentHealth;
 	float mover_x;
 	float mover_y;

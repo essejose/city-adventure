@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Sword : MonoBehaviour {
+public class ParticleTimer : MonoBehaviour {
 
-	public float timer = .5f;
-	public GameObject swordParticle;
+	public float timer; 
 	// Use this for initialization
 	void Start () {
 		
@@ -13,12 +12,9 @@ public class Sword : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
 		timer -= Time.deltaTime;
-		if (timer <= 0) {
-			Instantiate (swordParticle, transform.position,transform.rotation);
-			Destroy (gameObject);
+		if(timer <= 0){ 
+			Destroy (gameObject); 
 		}
-
 	}
 }

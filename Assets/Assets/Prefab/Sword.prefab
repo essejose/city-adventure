@@ -99,7 +99,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83cd05135424381448bed0b04f4c177e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 1.5
+  timer: 1
+  swordParticle: {fileID: 1486342082215470, guid: c7a5f80e88cb3524892e6ac2a35e0173,
+    type: 2}
 --- !u!212 &212990322659628126
 SpriteRenderer:
   m_ObjectHideFlags: 1
