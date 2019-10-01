@@ -21,4 +21,7 @@ public class Sword : MonoBehaviour {
 		}
 
 	}
+	public void CreateParticle(){
+		Instantiate (swordParticle, transform.position,transform.rotation);
+	}
 }

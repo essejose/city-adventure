@@ -17,7 +17,7 @@ public class Player : MonoBehaviour {
 	int currentHealth;
 	float mover_x;
 	float mover_y;
-	string lastPosition = "Down";
+	string lastPosition = "Left";
 	public GameObject weapon;
 
 
@@ -49,14 +49,15 @@ public class Player : MonoBehaviour {
 	}
 
 	public void Attack(){
-
-		 
-		GameObject newWeapon = Instantiate (weapon, transform.position, weapon.transform.rotation);
+ 		
+	
+ 
+		GameObject newWeapon = Instantiate (weapon, transform.position , weapon.transform.rotation);
 
 	
 		if (lastPosition == "Up")
 		{
-			newWeapon.transform.Rotate (0, 0, 0);
+			newWeapon.transform.Rotate (0, 0, 0); 
 			newWeapon.GetComponent<Rigidbody2D>().AddForce(Vector2.up * weaponThrust);
 		}
 
